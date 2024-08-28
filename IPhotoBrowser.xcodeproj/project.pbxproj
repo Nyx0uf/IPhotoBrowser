@@ -248,6 +248,7 @@
 			knownRegions = (
 				English,
 				en,
+				Base,
 			);
 			mainGroup = OBJ_5;
 			productRefGroup = OBJ_14 /* Products */;
