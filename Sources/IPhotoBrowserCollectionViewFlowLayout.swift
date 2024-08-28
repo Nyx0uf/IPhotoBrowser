@@ -28,7 +28,7 @@ final class IPhotoBrowserCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override class var layoutAttributesClass: AnyClass { return IPhotoBrowserCollectionViewLayoutAttributes.self }
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let attributes = super.layoutAttributesForElements(in: rect) else { return nil }
-        return attributes.flatMap { $0.copy() as? UICollectionViewLayoutAttributes }.map { self.transformLayoutAttributes($0) }
+        return attributes.compactMap { $0.copy() as? UICollectionViewLayoutAttributes }.map { self.transformLayoutAttributes($0) }
     }
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true

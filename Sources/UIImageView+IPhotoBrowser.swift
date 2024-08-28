@@ -10,7 +10,7 @@ import UIKit.UIImageView
 
 // MARK: - Load web image
 extension UIImageView {
-    open func loadWebImage(imageUrl: URL, completion: @escaping (UIImage?, URL) -> Void) {
+	public func loadWebImage(imageUrl: URL, completion: @escaping (UIImage?, URL) -> Void) {
         if let image = IPhotoWebImageCache.default.image(for: imageUrl.absoluteString) {
             completion(image, imageUrl)
             return
@@ -26,7 +26,7 @@ extension UIImageView {
                 IPhotoWebImageCache.default.setImage(image: image, for: imageUrl.absoluteString)
                 completion(image, imageUrl)
             } else {
-                print("Failed loading image: \(error)")
+				print("Failed loading image: \(String(describing: error))")
             }
             }.resume()
     }

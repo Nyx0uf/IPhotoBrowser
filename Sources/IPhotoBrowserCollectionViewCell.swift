@@ -9,7 +9,7 @@
 import UIKit.UICollectionViewCell
 import Photos
 
-protocol IPhotoBrowserCollectionViewCellDelegate: class {
+protocol IPhotoBrowserCollectionViewCellDelegate: AnyObject {
     func cellImageViewWillBeginDragging(_ cell: IPhotoBrowserCollectionViewCell)
     func cellImageViewDidChanging(_ cell: IPhotoBrowserCollectionViewCell)
     func cellImageViewDidDragging(_ cell: IPhotoBrowserCollectionViewCell, ratio: CGFloat)
@@ -199,7 +199,7 @@ class IPhotoBrowserCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Private
 private extension IPhotoBrowserCollectionViewCell {
-    dynamic func handleGestureImageDragging(_ gestureRecognizer: UIPanGestureRecognizer) {
+	@objc dynamic func handleGestureImageDragging(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard let view = gestureRecognizer.view else { return }
         let point = gestureRecognizer.translation(in: view)
         switch gestureRecognizer.state {
@@ -234,10 +234,10 @@ private extension IPhotoBrowserCollectionViewCell {
         default:
             break
         }
-        let ratio = fabs((view.center.y - (originalCenter.y))  / ((originalCenter.y)))
+		let ratio = abs((view.center.y - (originalCenter.y))  / ((originalCenter.y)))
         delegate?.cellImageViewDidDragging(self, ratio: ratio)
     }
-    dynamic func handleGestureImageDoubleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+	@objc dynamic func handleGestureImageDoubleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         guard scrollView.minimumZoomScale == scrollView.zoomScale else {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
             return
@@ -319,7 +319,7 @@ extension IPhotoBrowserCollectionViewCell: UIGestureRecognizerDelegate {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer, let gestureImageView = gestureRecognizer.view else { return true }
         let velocity = gestureRecognizer.translation(in: gestureImageView)
-        return fabs(velocity.y) > fabs(velocity.x)
+		return abs(velocity.y) > abs(velocity.x)
     }
 }
 
@@ -333,7 +333,7 @@ final class PaddingLabel: UILabel {
         return CGSize(width: padding.left + padding.right, height: padding.top + padding.bottom)
     }
     override func drawText(in rect: CGRect) {
-        let newRect = UIEdgeInsetsInsetRect(rect, padding)
+		let newRect = rect.inset(by: padding)
         super.drawText(in: newRect)
     }
     override var intrinsicContentSize: CGSize {

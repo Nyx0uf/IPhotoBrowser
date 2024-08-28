@@ -10,12 +10,12 @@ import UIKit.UIImage
 import Foundation.NSCache
 
 open class IPhotoWebImageCache {
-    open static let `default` = IPhotoWebImageCache(name: "default")
+	public static let `default` = IPhotoWebImageCache(name: "default")
     init(name: String) {
         let cacheName = "io.github.hryk224.IPhotoBrowserExample.ImageCache.\(name)"
         memoryCache.name = cacheName
         #if !os(macOS) && !os(watchOS)
-            NotificationCenter.default.addObserver(self, selector: #selector(clearMemoryCache), name: .UIApplicationDidReceiveMemoryWarning, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(clearMemoryCache), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
         #endif
     }
     deinit {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public protocol IPhotoBrowserDelegate: class {
+@objc public protocol IPhotoBrowserDelegate: AnyObject {
     func iPhotoBrowser(_ iPhotoBrowser: IPhotoBrowser, didChange index: Int)
     @objc optional func iPhotoBrowserDidDismissing(_ iPhotoBrowser: IPhotoBrowser)
     @objc optional func iPhotoBrowserDidCanceledDismiss(_ iPhotoBrowser: IPhotoBrowser)

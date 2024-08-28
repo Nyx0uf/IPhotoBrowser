@@ -24,7 +24,7 @@ open class IPhotoBrowserNavigationController: UINavigationController {
 }
 
 extension IPhotoBrowserNavigationController: UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+	public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard let sourceProtocol = fromVC as? IPhotoBrowserAnimatedTransitionProtocol, let destinationProtocol = toVC as? IPhotoBrowserAnimatedTransitionProtocol else { return nil }
         let animator = IPhotoBrowserAnimatedTransition(operation: operation)
         animator.sourceProtocol = sourceProtocol

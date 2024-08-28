@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol IPhotoBrowserAnimatedTransitionProtocol: class {
+public protocol IPhotoBrowserAnimatedTransitionProtocol: AnyObject {
     var iPhotoBrowserSelectedImageViewCopy: UIImageView? { get }
     var iPhotoBrowserDestinationImageViewSize: CGSize? { get }
     var iPhotoBrowserDestinationImageViewCenter: CGPoint? { get }
@@ -27,13 +27,13 @@ final class IPhotoBrowserAnimatedTransition: NSObject, UIViewControllerAnimatedT
         return (operation != nil) ? .pushed : .presented
     }
     private var isPresent: Bool?
-    private var operation: UINavigationControllerOperation?
+	private var operation: UINavigationController.Operation?
     required init(isPresent: Bool, transitionDuration: TimeInterval = 0.35) {
         self.isPresent = isPresent
         self.transitionDuration = transitionDuration
         super.init()
     }
-    required init(operation: UINavigationControllerOperation, transitionDuration: TimeInterval = 0.35) {
+	required init(operation: UINavigationController.Operation, transitionDuration: TimeInterval = 0.35) {
         self.operation = operation
         self.transitionDuration = transitionDuration
         super.init()

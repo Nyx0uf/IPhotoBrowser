@@ -7,6 +7,7 @@
 //
 
 import Photos
+import UIKit
 
 extension PHAsset {
     private var imageManager: PHImageManager {
@@ -14,7 +15,7 @@ extension PHAsset {
     }
     func fetchImage(targetSize: CGSize, options: PHImageRequestOptions, completion: @escaping (UIImage?) -> Void) {
         if representsBurst {
-            imageManager.requestImageData(for: self, options: options) { data, _, _, _ in
+            imageManager.requestImageDataAndOrientation(for: self, options: options) { data, _, _, _ in
                 let image = data.flatMap { UIImage(data: $0) }
                 completion(image)
             }

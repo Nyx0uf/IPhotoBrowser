@@ -334,7 +334,7 @@ extension IPhotoBrowser: UIViewControllerTransitioningDelegate {
 
 // MARK: - Private
 private extension IPhotoBrowser {
-    var flexibleAutoresizing: UIViewAutoresizing {
+	var flexibleAutoresizing: UIView.AutoresizingMask {
         return [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleRightMargin, .flexibleBottomMargin, .flexibleLeftMargin]
     }
     func setUp() {
@@ -415,7 +415,7 @@ private extension IPhotoBrowser {
             UIView.animate(withDuration: 0.15, delay: isShown ? delay : 0, options: .curveEaseInOut, animations: animations, completion: nil)
         }
     }
-    dynamic func dismissAction() {
+	@objc dynamic func dismissAction() {
         showItemViews(false)
         dismiss(animated: true, completion: nil)
     }
